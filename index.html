@@ -1,5 +1,17 @@
 <!doctype html><html lang="tr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="theme-color" content="#0c1726"><title>İngilizce Cümle Makinesi</title><style>
-:root{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;color:#152538;background:#eef5f4}*{box-sizing:border-box}body{margin:0}header{background:#0c1726;color:white;padding:27px 20px 23px}header small{color:#8de0cb;letter-spacing:2px;font-weight:800}h1{font-size:27px;margin:8px 0}header p{color:#c9d6dd;margin:0;font-size:14px;line-height:1.5}.wrap{max-width:740px;margin:auto;padding:16px 15px 90px}.tabs{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:16px}.tabs button{border:0;border-radius:12px;padding:13px 5px;background:white;color:#284354;font-weight:800}.tabs .active{background:#0d988b;color:white}.card{background:white;border-radius:19px;padding:18px;margin-bottom:14px;box-shadow:0 3px 16px #1233}h2{font-size:19px;margin:0 0 12px}.muted{color:#687985;font-size:13px;line-height:1.5}.row{display:flex;gap:8px;flex-wrap:wrap}.chip{background:#eaf3f2;border:2px solid transparent;border-radius:12px;padding:11px 13px;color:#183a42;font-weight:700;font-size:15px}.chip.selected{background:#c6f5e9;border-color:#0b9b83}.label{font-size:12px;font-weight:800;color:#008e7e;margin:16px 0 8px;letter-spacing:.7px}.output{background:#0c1726;color:white;border-radius:16px;padding:22px 16px;margin-top:18px}.english{font-size:25px;font-weight:800;line-height:1.35}.turkish{color:#c8e8e1;margin-top:8px;font-size:15px}.actions{display:flex;gap:8px;margin-top:14px;flex-wrap:wrap}button{cursor:pointer} .primary,.secondary{border:0;border-radius:12px;padding:13px 16px;font-weight:800;font-size:14px}.primary{background:#0c9d88;color:white}.secondary{background:#e8f0f1;color:#18343d}.full{width:100%;margin-top:10px}.status{font-size:13px;color:#60737a;margin-top:10px}.question{font-size:21px;font-weight:800;margin:18px 0}.answer{width:100%;padding:14px;border:2px solid #d5e4e5;border-radius:12px;font-size:17px}.feedback{padding:12px;border-radius:12px;background:#eaf5ef;margin-top:12px;line-height:1.5}.hidden{display:none}.stat{display:flex;justify-content:space-between;padding:12px 0;border-bottom:1px solid #edf1f1}.progress{height:10px;background:#e3eeee;border-radius:10px;overflow:hidden;margin:12px 0}.progress div{height:100%;background:#0c9d88;transition:width .2s}.footer{font-size:12px;color:#73888c;text-align:center;padding:8px}</style></head><body><header><small>A1 → A2 • GÜNLÜK İNGİLİZCE</small><h1>🧩 Cümle Makinesi</h1><p>Kutulara dokun, doğru cümle kur, dinle ve öğrendiklerini tekrar et.</p></header><main class="wrap"><nav class="tabs"><button class="active" data-tab="build">🧩 Oluştur</button><button data-tab="quiz">🎯 Test</button><button data-tab="stats">📈 İlerlemem</button></nav><section id="build"><div class="card"><h2>Bugünün kalıbı</h2><div class="muted">Önce bir cümle yapısı seç. Sadece uyumlu kelimeler gösterilir.</div><div id="patterns" class="row" style="margin-top:12px"></div><div id="slots"></div><div class="output"><div id="en" class="english"></div><div id="tr" class="turkish"></div><div class="actions"><button class="primary" id="speak">🔊 Dinle</button><button class="secondary" id="hideTr">🙈 Türkçeyi gizle</button><button class="secondary" id="save">⭐ Öğrendim</button></div></div><div id="msg" class="status"></div></div><div class="card"><h2>💡 Nasıl öğrenirim?</h2><div class="muted">Bir kalıptan başla, kutularda kelimeleri değiştir, sesli tekrar et. Sonra Test bölümüne geç. Her gün 5–10 dakika yeterli bir başlangıçtır.</div></div></section><section id="quiz" class="hidden"><div class="card"><h2>🎯 Türkçeden İngilizceye</h2><div class="muted">Yanlış yaptığın cümleler daha sık gelir. Büyük/küçük harf ve son nokta önemli değil.</div><div id="qCount" class="status"></div><div id="question" class="question"></div><input id="answer" class="answer" placeholder="İngilizcesini yaz..." autocomplete="off" autocapitalize="off" spellcheck="false"><button class="primary full" id="check">Kontrol et</button><div id="feedback" class="feedback hidden"></div><button class="secondary full" id="next">Sonraki cümle →</button></div></section><section id="stats" class="hidden"><div class="card"><h2>📈 Öğrenme durumum</h2><div class="stat"><span>Öğrendiğim cümleler</span><strong id="learned">0</strong></div><div class="stat"><span>Doğru test cevapları</span><strong id="correct">0</strong></div><div class="stat"><span>Yanlış test cevapları</span><strong id="wrong">0</strong></div><div class="stat"><span>Başarı oranı</span><strong id="rate">—</strong></div><div class="label">Öğrenilen örnekler</div><div class="progress"><div id="bar"></div></div><div class="muted" id="barText"></div><button class="secondary full" id="reset">İlerlemeyi sıfırla</button></div></section><div class="footer">Verilerin bu cihazdaki tarayıcıda saklanır. Sayfayı açmak için internet gerekir. Ses özelliği cihazın İngilizce ses desteğine bağlıdır.</div></main><script>
+:root{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;color:#152538;background:#eef5f4}*{box-sizing:border-box}body{margin:0}header{background:#0c1726;color:white;padding:27px 20px 23px}header small{color:#8de0cb;letter-spacing:2px;font-weight:800}h1{font-size:27px;margin:8px 0}header p{color:#c9d6dd;margin:0;font-size:14px;line-height:1.5}.wrap{max-width:740px;margin:auto;padding:16px 15px 90px}.tabs{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:16px}.tabs button{border:0;border-radius:12px;padding:13px 5px;background:white;color:#284354;font-weight:800}.tabs .active{background:#0d988b;color:white}.card{background:white;border-radius:19px;padding:18px;margin-bottom:14px;box-shadow:0 3px 16px #1233}h2{font-size:19px;margin:0 0 12px}.muted{color:#687985;font-size:13px;line-height:1.5}.row{display:flex;gap:8px;flex-wrap:wrap}.chip{background:#eaf3f2;border:2px solid transparent;border-radius:12px;padding:11px 13px;color:#183a42;font-weight:700;font-size:15px}.chip.selected{background:#c6f5e9;border-color:#0b9b83}.label{font-size:12px;font-weight:800;color:#008e7e;margin:16px 0 8px;letter-spacing:.7px}.output{background:#0c1726;color:white;border-radius:16px;padding:22px 16px;margin-top:18px}.english{font-size:25px;font-weight:800;line-height:1.35}.turkish{color:#c8e8e1;margin-top:8px;font-size:15px}.actions{display:flex;gap:8px;margin-top:14px;flex-wrap:wrap}button{cursor:pointer} .primary,.secondary{border:0;border-radius:12px;padding:13px 16px;font-weight:800;font-size:14px}.primary{background:#0c9d88;color:white}.secondary{background:#e8f0f1;color:#18343d}.full{width:100%;margin-top:10px}.status{font-size:13px;color:#60737a;margin-top:10px}.question{font-size:21px;font-weight:800;margin:18px 0}.answer{width:100%;padding:14px;border:2px solid #d5e4e5;border-radius:12px;font-size:17px}.feedback{padding:12px;border-radius:12px;background:#eaf5ef;margin-top:12px;line-height:1.5}.hidden{display:none}.stat{display:flex;justify-content:space-between;padding:12px 0;border-bottom:1px solid #edf1f1}.progress{height:10px;background:#e3eeee;border-radius:10px;overflow:hidden;margin:12px 0}.progress div{height:100%;background:#0c9d88;transition:width .2s}.footer{font-size:12px;color:#73888c;text-align:center;padding:8px}</style><style>
+.study-nav{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:16px}
+.study-nav button{flex:1 0 105px;min-height:44px}
+.study-controls{display:flex;flex-wrap:wrap;gap:10px;margin:12px 0}
+.study-controls label{flex:1 1 140px;font-weight:700;font-size:14px}
+.study-controls select,.study-controls input{display:block;width:100%;margin-top:4px;min-height:44px;padding:8px;border:1px solid #b8cece;border-radius:9px;color:#18343d;background:white;font:inherit;font-size:16px}
+.study-example{border-top:1px solid #deeaea;padding:12px 0;line-height:1.5}
+.study-example button,.study-nav button{min-height:44px}
+.study-example strong{overflow-wrap:anywhere}
+.study-answer{margin-top:10px}
+.study-status{min-height:1.5em}
+</style>
+</head><body><header><small>A1 → A2 • GÜNLÜK İNGİLİZCE</small><h1>🧩 Cümle Makinesi</h1><p>Kutulara dokun, doğru cümle kur, dinle ve öğrendiklerini tekrar et.</p></header><main class="wrap"><nav class="tabs study-nav"><button class="active" data-tab="build">🧩 Oluştur</button><button data-tab="quiz">🎯 Test</button><button data-tab="stats">📈 İlerlemem</button><button data-tab="tenses">Zamanlar</button><button data-tab="verbs">Fiiller</button><button data-tab="path">Öğrenme Yolu</button><button data-tab="review">Akıllı Tekrar</button></nav><section id="build"><div class="card"><h2>Bugünün kalıbı</h2><div class="muted">Önce bir cümle yapısı seç. Sadece uyumlu kelimeler gösterilir.</div><div id="patterns" class="row" style="margin-top:12px"></div><div id="slots"></div><div class="output"><div id="en" class="english"></div><div id="tr" class="turkish"></div><div class="actions"><button class="primary" id="speak">🔊 Dinle</button><button class="secondary" id="hideTr">🙈 Türkçeyi gizle</button><button class="secondary" id="save">⭐ Öğrendim</button></div></div><div id="msg" class="status"></div></div><div class="card"><h2>💡 Nasıl öğrenirim?</h2><div class="muted">Bir kalıptan başla, kutularda kelimeleri değiştir, sesli tekrar et. Sonra Test bölümüne geç. Her gün 5–10 dakika yeterli bir başlangıçtır.</div></div></section><section id="quiz" class="hidden"><div class="card"><h2>🎯 Türkçeden İngilizceye</h2><div class="muted">Yanlış yaptığın cümleler daha sık gelir. Büyük/küçük harf ve son nokta önemli değil.</div><div id="qCount" class="status"></div><div id="question" class="question"></div><input id="answer" class="answer" placeholder="İngilizcesini yaz..." autocomplete="off" autocapitalize="off" spellcheck="false"><button class="primary full" id="check">Kontrol et</button><div id="feedback" class="feedback hidden"></div><button class="secondary full" id="next">Sonraki cümle →</button></div></section><section id="stats" class="hidden"><div id="studyStats"></div><div class="card"><h2>📈 Öğrenme durumum</h2><div class="stat"><span>Öğrendiğim cümleler</span><strong id="learned">0</strong></div><div class="stat"><span>Doğru test cevapları</span><strong id="correct">0</strong></div><div class="stat"><span>Yanlış test cevapları</span><strong id="wrong">0</strong></div><div class="stat"><span>Başarı oranı</span><strong id="rate">—</strong></div><div class="label">Öğrenilen örnekler</div><div class="progress"><div id="bar"></div></div><div class="muted" id="barText"></div><button class="secondary full" id="reset">İlerlemeyi sıfırla</button></div></section><section id="tenses" class="hidden"></section><section id="verbs" class="hidden"></section><section id="path" class="hidden"></section><section id="review" class="hidden"></section><div id="studyStorage" role="status"></div><div class="footer">Verilerin bu cihazdaki tarayıcıda saklanır. Sayfayı açmak için internet gerekir. Ses özelliği cihazın İngilizce ses desteğine bağlıdır.</div></main><script>
 const patterns=[
 {name:'İstiyorum',slots:[{name:'KİM?',items:[['I','Ben'],['You','Sen'],['We','Biz'],['They','Onlar']]},{name:'NE İSTİYOR?',items:[['want water','su istiyorum'],['want coffee','kahve istiyorum'],['want tea','çay istiyorum'],['want help','yardım istiyorum'],['want to go','gitmek istiyorum']]}],make:(s)=>[s[0][0]+' '+s[1][0]+'.',s[0][1]+' '+s[1][1].replace('istiyorum',s[0][0]==='I'?'istiyorum':s[0][0]==='You'?'istiyorsun':s[0][0]==='We'?'istiyoruz':'istiyorlar')+'.']},
 {name:'Yapabilirim',slots:[{name:'KİM?',items:[['I','Ben'],['You','Sen'],['He','O (erkek)'],['She','O (kadın)'],['We','Biz']]},{name:'NE YAPABİLİR?',items:[['can speak English','İngilizce konuşabilir'],['can swim','yüzebilir'],['can cook','yemek yapabilir'],['can help','yardım edebilir'],['can come tomorrow','yarın gelebilir']]}],make:s=>[s[0][0]+' '+s[1][0]+'.',s[0][1]+' '+s[1][1]+(s[0][0]==='I'?'im':s[0][0]==='You'?'sin':s[0][0]==='We'?'iz':'')+'.']},
@@ -23,4 +35,486 @@ patterns[4].make=s=>{const j=patterns[4].slots[1].items.indexOf(s[1]),i=patterns
 let state={p:0,sel:[0,0]},progress={learned:{},correct:0,wrong:0,mistakes:{}};try{progress={...progress,...JSON.parse(localStorage.getItem('englishMachineV1')||'{}')}}catch(e){}const $=id=>document.getElementById(id);const store=()=>{try{localStorage.setItem('englishMachineV1',JSON.stringify(progress))}catch(e){}};const current=()=>patterns[state.p].make(patterns[state.p].slots.map((x,i)=>x.items[state.sel[i]]));const key=()=>current()[0];function render(){ $('patterns').innerHTML='';patterns.forEach((p,i)=>{let b=document.createElement('button');b.className='chip '+(i===state.p?'selected':'');b.textContent=p.name;b.onclick=()=>{state.p=i;state.sel=[0,0];render()};$('patterns').append(b)});$('slots').innerHTML='';patterns[state.p].slots.forEach((slot,j)=>{let lab=document.createElement('div');lab.className='label';lab.textContent=(j+1)+'. '+slot.name;$('slots').append(lab);let row=document.createElement('div');row.className='row';slot.items.forEach((item,i)=>{let b=document.createElement('button');b.className='chip '+(state.sel[j]===i?'selected':'');b.textContent=item[0];b.onclick=()=>{state.sel[j]=i;render()};row.append(b)});$('slots').append(row)});$('en').textContent=current()[0];$('tr').textContent=current()[1];$('msg').textContent=progress.learned[key()]?'✓ Bu cümleyi öğrendiklerine ekledin.':'';$('tr').style.display='';$('hideTr').textContent='🙈 Türkçeyi gizle'}
 function speak(s){if(!('speechSynthesis' in window)){alert('Bu cihazda sesli okuma desteklenmiyor.');return}speechSynthesis.cancel();let u=new SpeechSynthesisUtterance(s);u.lang='en-US';u.rate=.83;speechSynthesis.speak(u)}$('speak').onclick=()=>speak(current()[0]);$('hideTr').onclick=()=>{let hide=$('tr').style.display!=='none';$('tr').style.display=hide?'none':'';$('hideTr').textContent=hide?'👀 Türkçeyi göster':'🙈 Türkçeyi gizle'};$('save').onclick=()=>{progress.learned[key()]=true;store();render()};document.querySelectorAll('[data-tab]').forEach(b=>b.onclick=()=>{document.querySelectorAll('[data-tab]').forEach(x=>x.classList.toggle('active',x===b));['build','quiz','stats'].forEach(id=>$(id).classList.toggle('hidden',id!==b.dataset.tab));if(b.dataset.tab==='quiz')newQuestion();if(b.dataset.tab==='stats')showStats()});
 let q=null,attempts=0,answered=false;function pool(){let a=[];patterns.forEach(p=>p.slots[0].items.forEach(a0=>p.slots[1].items.forEach(a1=>{let item=p.make([a0,a1]);a.push(item);if(progress.mistakes[item[0]])a.push(item,item)})));return a}function newQuestion(){answered=false;$('check').disabled=false;let a=pool();q=a[Math.floor(Math.random()*a.length)];attempts++;$('qCount').textContent='Soru '+attempts;$('question').textContent=q[1];$('answer').value='';$('feedback').classList.add('hidden');$('answer').focus()}const norm=s=>s.toLocaleLowerCase('en').replace(/[.!?’,']/g,'').replace(/\s+/g,' ').trim();$('check').onclick=()=>{if(!q||answered||!$('answer').value.trim())return;answered=true;let ok=norm($('answer').value)===norm(q[0]);if(ok){progress.correct++;delete progress.mistakes[q[0]]}else{progress.wrong++;progress.mistakes[q[0]]=true}$('feedback').classList.remove('hidden');$('feedback').innerHTML=(ok?'✅ Doğru!':'🔁 Tekrar dene. Doğru cevap:')+'<br><strong></strong>';$('feedback').querySelector('strong').textContent=q[0];store();speak(q[0]);$('check').disabled=true;};$('next').onclick=newQuestion;$('answer').addEventListener('keydown',e=>{if(e.key==='Enter')$('check').click()});function showStats(){let n=Object.keys(progress.learned).length,total=patterns.reduce((a,p)=>a+p.slots[0].items.length*p.slots[1].items.length,0);$('learned').textContent=n;$('correct').textContent=progress.correct;$('wrong').textContent=progress.wrong;$('rate').textContent=progress.correct+progress.wrong?Math.round(100*progress.correct/(progress.correct+progress.wrong))+'%':'—';$('bar').style.width=Math.min(100,100*n/total)+'%';$('barText').textContent=n+' / '+total+' örnek cümle'}$('reset').onclick=()=>{if(confirm('Tüm öğrenme ve test ilerlemen silinsin mi?')){progress={learned:{},correct:0,wrong:0,mistakes:{}};store();showStats()}};render();
+</script><script>
+const lessons = [
+  ["a1", "be", "Am / is / are", "İsim, yaş ya da durum söylerken kullanılır. I ile am, he/she/it ile is, you/we/they ile are kullanılır. Soruda am/is/are öne gelir.", "I am at home.", "Evdeyim.", "She is not tired.", "O (kadın) yorgun değil.", "Are you ready?", "Hazır mısın?", "I ___ ready.", "am", "is", "are", "ready", "hazır"],
+  ["a1", "articles", "A / an ve çoğullar", "Tek bir şeyden söz ederken sessiz ses önünde a, sesli ses önünde an kullan. Birden fazla nesnede çoğunlukla -s eklenir.", "I have an apple.", "Bir elmam var.", "I have two books.", "İki kitabım var.", "Is this a bag?", "Bu bir çanta mı?", "I have ___ apple.", "an", "a", "two", "bag", "çanta"],
+  ["a1", "present", "Present Simple", "Alışkanlıkları ve genel durumları anlatır. He/she/it ile olumlu fiil -s alır. Olumsuzda do not/does not, soruda do/does gelir ve fiil yalın kalır.", "She drinks tea every day.", "O (kadın) her gün çay içer.", "She does not drink tea every day.", "O (kadın) her gün çay içmez.", "Does she drink tea every day?", "O (kadın) her gün çay içer mi?", "She ___ tea every day.", "drinks", "drink", "drinking", "every day", "her gün"],
+  ["a1", "continuous", "Present Continuous", "Şu anda olan bir işi anlatır. Am/is/are + fiil-ing kullan. Olumsuzda not ekle, soruda am/is/are başa gelir.", "He is cooking now.", "O (erkek) şu anda yemek yapıyor.", "He is not cooking now.", "O (erkek) şu anda yemek yapmıyor.", "Is he cooking now?", "O (erkek) şu anda yemek yapıyor mu?", "He is ___ now.", "cooking", "cook", "cooked", "now", "şu anda"],
+  ["a1", "can", "Can ile beceri", "Can yapabilmek demektir. Her öznede can aynı kalır ve ardından yalın fiil gelir. Olumsuzu cannot, soruda can baştadır.", "I can swim.", "Yüzebilirim.", "I cannot swim.", "Yüzemem.", "Can you swim?", "Yüzebilir misin?", "I can ___.", "swim", "swims", "swimming", "swim", "yüzmek"],
+  ["a2", "past", "Past Simple", "Geçmişte biten işleri anlatır. Olumlu cümlede V2 kullanılır. Did not ve did’den sonra fiil V1 olur.", "She went home yesterday.", "O (kadın) dün eve gitti.", "She did not go home yesterday.", "O (kadın) dün eve gitmedi.", "Did she go home yesterday?", "O (kadın) dün eve gitti mi?", "She ___ home yesterday.", "went", "go", "gone", "yesterday", "dün"],
+  ["a2", "going", "Going to", "Önceden yapılmış planı anlatır. Am/is/are + going to + V1 kullan. Not, am/is/are’den sonra gelir. Soruda am/is/are başa alınır.", "We are going to cook tonight.", "Bu akşam yemek yapmayı planlıyoruz.", "We are not going to cook tonight.", "Bu akşam yemek yapmayı planlamıyoruz.", "Are we going to cook tonight?", "Bu akşam yemek yapmayı planlıyor muyuz?", "We ___ going to cook.", "are", "is", "am", "tonight", "bu akşam"],
+  ["a2", "will", "Future Simple (will)", "Anlık karar, teklif veya tahminde will kullanılır. Ardından V1 gelir. Olumsuzu will not, soruda will başa gelir.", "I will help you.", "Sana yardım edeceğim.", "I will not help you.", "Sana yardım etmeyeceğim.", "Will you help me?", "Bana yardım edecek misin?", "I will ___ you.", "help", "helped", "helps", "tomorrow", "yarın"],
+  ["a2", "compare", "Karşılaştırmalar", "Kısa sıfatlara çoğunlukla -er ekle ve than ile kıyasla. Uzun sıfatlarda more kullan. Good sözcüğünün karşılaştırması better olur.", "This bag is lighter than mine.", "Bu çanta benimkinden daha hafif.", "My phone is more expensive than yours.", "Telefonum seninkinden daha pahalı.", "This one is better.", "Bu daha iyi.", "This bag is lighter ___ mine.", "than", "then", "that", "lighter", "daha hafif"],
+  ["a2", "perfect", "Present Perfect (giriş)", "Deneyimi ya da sonucu şimdiyle bağlantılı bir işi anlatır. Have/has + V3 kullanılır. Yesterday gibi bitmiş bir zaman verilirse Past Simple kullan.", "She has finished her work.", "O (kadın) işini bitirdi.", "She has not finished her work yet.", "O (kadın) işini henüz bitirmedi.", "Has she finished her work yet?", "O (kadın) işini bitirdi mi?", "She has ___ her work.", "finished", "finish", "finishing", "yet", "henüz"]
+];
+const verbs = [
+  ["be", "was/were", "been", "olmak"],
+  ["have", "had", "had", "sahip olmak"],
+  ["do", "did", "done", "yapmak"],
+  ["say", "said", "said", "söylemek"],
+  ["go", "went", "gone", "gitmek"],
+  ["get", "got", "gotten", "almak / edinmek"],
+  ["make", "made", "made", "yapmak / üretmek"],
+  ["know", "knew", "known", "bilmek"],
+  ["think", "thought", "thought", "düşünmek"],
+  ["take", "took", "taken", "almak / götürmek"],
+  ["see", "saw", "seen", "görmek"],
+  ["come", "came", "come", "gelmek"],
+  ["give", "gave", "given", "vermek"],
+  ["find", "found", "found", "bulmak"],
+  ["tell", "told", "told", "anlatmak"],
+  ["become", "became", "become", "olmak / dönüşmek"],
+  ["leave", "left", "left", "ayrılmak"],
+  ["feel", "felt", "felt", "hissetmek"],
+  ["put", "put", "put", "koymak"],
+  ["bring", "brought", "brought", "getirmek"],
+  ["begin", "began", "begun", "başlamak"],
+  ["keep", "kept", "kept", "saklamak / tutmak"],
+  ["hold", "held", "held", "tutmak"],
+  ["write", "wrote", "written", "yazmak"],
+  ["stand", "stood", "stood", "ayakta durmak"],
+  ["hear", "heard", "heard", "duymak"],
+  ["let", "let", "let", "izin vermek"],
+  ["mean", "meant", "meant", "anlamına gelmek"],
+  ["set", "set", "set", "ayarlamak"],
+  ["meet", "met", "met", "buluşmak / tanışmak"],
+  ["run", "ran", "run", "koşmak"],
+  ["pay", "paid", "paid", "ödemek"],
+  ["sit", "sat", "sat", "oturmak"],
+  ["speak", "spoke", "spoken", "konuşmak"],
+  ["read", "read", "read", "okumak"],
+  ["grow", "grew", "grown", "büyümek"],
+  ["lose", "lost", "lost", "kaybetmek"],
+  ["fall", "fell", "fallen", "düşmek"],
+  ["send", "sent", "sent", "göndermek"],
+  ["build", "built", "built", "inşa etmek"],
+  ["understand", "understood", "understood", "anlamak"],
+  ["break", "broke", "broken", "kırmak"],
+  ["spend", "spent", "spent", "harcamak / vakit geçirmek"],
+  ["cut", "cut", "cut", "kesmek"],
+  ["buy", "bought", "bought", "satın almak"],
+  ["eat", "ate", "eaten", "yemek"],
+  ["drink", "drank", "drunk", "içmek"],
+  ["sleep", "slept", "slept", "uyumak"],
+  ["wake", "woke", "woken", "uyanmak"],
+  ["wear", "wore", "worn", "giymek / üzerinde olmak"],
+  ["drive", "drove", "driven", "araba sürmek"],
+  ["ride", "rode", "ridden", "binmek"],
+  ["choose", "chose", "chosen", "seçmek"],
+  ["forget", "forgot", "forgotten", "unutmak"],
+  ["teach", "taught", "taught", "öğretmek"],
+  ["catch", "caught", "caught", "yakalamak"],
+  ["win", "won", "won", "kazanmak"],
+  ["sell", "sold", "sold", "satmak"],
+  ["swim", "swam", "swum", "yüzmek"],
+  ["sing", "sang", "sung", "şarkı söylemek"],
+  ["fly", "flew", "flown", "uçmak"],
+  ["show", "showed", "shown", "göstermek"],
+  ["want", "wanted", "wanted", "istemek"],
+  ["need", "needed", "needed", "ihtiyaç duymak"],
+  ["like", "liked", "liked", "beğenmek"],
+  ["love", "loved", "loved", "sevmek"],
+  ["work", "worked", "worked", "çalışmak"],
+  ["call", "called", "called", "aramak"],
+  ["try", "tried", "tried", "denemek"],
+  ["ask", "asked", "asked", "sormak"],
+  ["help", "helped", "helped", "yardım etmek"],
+  ["live", "lived", "lived", "yaşamak"],
+  ["look", "looked", "looked", "bakmak / görünmek"],
+  ["wait", "waited", "waited", "beklemek"],
+  ["start", "started", "started", "başlamak"],
+  ["stop", "stopped", "stopped", "durmak"],
+  ["open", "opened", "opened", "açmak"],
+  ["close", "closed", "closed", "kapatmak"],
+  ["use", "used", "used", "kullanmak"],
+  ["talk", "talked", "talked", "konuşmak"],
+  ["play", "played", "played", "oynamak"],
+  ["listen", "listened", "listened", "dinlemek"],
+  ["watch", "watched", "watched", "izlemek"],
+  ["walk", "walked", "walked", "yürümek"],
+  ["move", "moved", "moved", "hareket etmek / taşınmak"],
+  ["learn", "learned", "learned", "öğrenmek"],
+  ["study", "studied", "studied", "ders çalışmak"],
+  ["clean", "cleaned", "cleaned", "temizlemek"],
+  ["cook", "cooked", "cooked", "yemek yapmak"],
+  ["wash", "washed", "washed", "yıkamak"],
+  ["visit", "visited", "visited", "ziyaret etmek"],
+  ["travel", "traveled", "traveled", "seyahat etmek"],
+  ["change", "changed", "changed", "değiştirmek"],
+  ["remember", "remembered", "remembered", "hatırlamak"],
+  ["answer", "answered", "answered", "cevaplamak"],
+  ["follow", "followed", "followed", "takip etmek"],
+  ["finish", "finished", "finished", "bitirmek"],
+  ["enjoy", "enjoyed", "enjoyed", "keyif almak"],
+  ["plan", "planned", "planned", "planlamak"],
+  ["happen", "happened", "happened", "gerçekleşmek"]
+].map((row, i) => ({row, regular:i >= 62}));
+const tenseIds = ['present','continuous','past','going','will','perfect'];
+const studyKey = 'englishMachineStudyV1';
+let study = {items:{}, learned:{}, lessons:{}};
+try {
+  study = {...study, ...JSON.parse(localStorage.getItem(studyKey) || '{}')};
+} catch {}
+function saveStudy() {
+  try { localStorage.setItem(studyKey, JSON.stringify(study)); }
+  catch { $('studyStorage').textContent = 'Tarayıcı ilerlemeyi kaydedemedi.'; }
+}
+function element(tag, text, parent) {
+  const node = document.createElement(tag);
+  if (text != null) node.textContent = text;
+  if (parent) parent.append(node);
+  return node;
+}
+function button(text, parent, action) {
+  const node = element('button', text, parent);
+  node.type = 'button';
+  node.className = 'secondary';
+  node.onclick = action;
+  return node;
+}
+function select(label, options, parent, change) {
+  const wrapper = element('label', label, parent);
+  const field = element('select', null, wrapper);
+  for (const [value, name] of options) {
+    element('option', name, field).value = value;
+  }
+  field.onchange = () => change(field.value);
+  return field;
+}
+function heard(text, parent, label='🔊 Dinle', pronounce=text) {
+  const line = element('div', null, parent);
+  line.className = 'study-example';
+  const phrase = element('strong', text, line);
+  phrase.lang = 'en';
+  button(label, line, () => speak(pronounce));
+  return line;
+}
+const makeQuestion = (id, level, prompt, answers, spoken=answers[0], choices=[]) =>
+  ({id, level, prompt, answers, spoken, choices});
+const allQuestions = [];
+function lessonQuestions(lesson) {
+  const [level,id,name,,en,tr,,,,,gap,a,b,c,word,meaning] = lesson;
+  return [
+    makeQuestion(id+':gap',level,gap,[a],en,[a,b,c]),
+    makeQuestion(id+':sentence',level,'İngilizce yaz: '+tr,[en]),
+    makeQuestion(id+':word',level,'İngilizce yaz: '+meaning,[word])
+  ];
+}
+lessons.forEach(lesson => allQuestions.push(...lessonQuestions(lesson)));
+verbs.forEach(({row:[base,past,part,meaning]},i) => {
+  allQuestions.push(makeQuestion('verb:'+base+':v1','a1','Fiilin V1 hâli: '+meaning,[base]));
+  allQuestions.push(makeQuestion('verb:'+base+':v2','a2',base+' fiilinin V2 hâli nedir?',past.split('/'),past.split('/')[0]));
+  allQuestions.push(makeQuestion('verb:'+base+':v3','a2',base+' fiilinin V3 hâli nedir?',(base==='get'?'gotten/got':part).split('/'),part));
+});
+function normalizeStudy(value) {
+  return value.toLowerCase().replace(/[.!?,’']/g,'').replace(/\s+/g,' ').trim()
+    .replace(/\b(i|we|you|they|he|she|it)ll\b/g,'$1 will')
+    .replace(/\bdont\b/g,'do not').replace(/\bdoesnt\b/g,'does not')
+    .replace(/\bdidnt\b/g,'did not').replace(/\bwont\b/g,'will not')
+    .replace(/\bim\b/g,'i am').replace(/\b(is|are|has|have)nt\b/g,'$1 not').replace(/\bcan not\b/g,'cannot');
+}
+function practice(parent, question, completed) {
+  const block = element('div', null, parent);
+  block.className = 'study-example';
+  element('strong', question.prompt, block);
+  const status = element('div', null, block);
+  status.className = 'study-status';
+  status.setAttribute('aria-live','polite');
+  const controls = element('div', null, block);
+  controls.className = 'study-controls';
+  let graded = false;
+  function grade(answer) {
+    if (graded || !answer.trim()) return;
+    graded = true;
+    const correct = question.answers.some(a => normalizeStudy(a) === normalizeStudy(answer));
+    const entry = study.items[question.id] || {right:0,wrong:0,miss:0};
+    if (correct) { entry.right++; entry.miss = Math.max(0,entry.miss-1); }
+    else { entry.wrong++; entry.miss = Math.min(5,entry.miss+1); }
+    study.items[question.id] = entry;
+    saveStudy();
+    status.textContent = (correct ? '✅ Doğru. ' : 'Doğru cevap: ') + question.answers.join(' / ');
+    controls.querySelectorAll('button,input').forEach(node => node.disabled = true);
+    button('🔊 Cevabı dinle', block, () => speak(question.spoken));
+    if (completed) completed(correct);
+  }
+  if (question.choices.length) {
+    [...question.choices].sort((a,b) => a.localeCompare(b)).forEach(choice => button(choice, controls, () => grade(choice)));
+  } else {
+    const wrapper = element('label','İngilizce cevabın',controls);
+    const input = element('input',null,wrapper);
+    input.autocomplete = 'off';
+    input.autocapitalize = 'none';
+    input.spellcheck = false;
+    input.onkeydown = event => { if (event.key === 'Enter' && !event.isComposing) grade(input.value); };
+    button('Kontrol et',controls,() => grade(input.value));
+  }
+}
+function lessonCard(lesson, parent, withPractice) {
+  const [level,id,name,rule, ...examples] = lesson;
+  const card = element('article',null,parent);
+  card.className = 'card';
+  element('h2', name, card);
+  element('p', rule, card);
+  for (let i=0;i<6;i+=2) {
+    const line = heard(examples[i],card);
+    element('div',examples[i+1],line);
+  }
+  if (withPractice) {
+    element('h3','Alıştırma ve mini test',card);
+    const results = new Set();
+    for (const question of lessonQuestions(lesson)) {
+      practice(card,question,correct => {
+        if (correct) results.add(question.id);
+        if (results.size === 3) {
+          study.lessons[id] = true;
+          saveStudy();
+          element('p','✓ Konuyu tamamladın.',card);
+        }
+      });
+    }
+  }
+}
+function renderTenses() {
+  const panel = $('tenses');
+  const controls = element('div',null,panel);
+  controls.className = 'study-controls';
+  const out = element('div',null,panel);
+  function show(id) {
+    out.replaceChildren();
+    lessonCard(lessons.find(lesson => lesson[1]===id),out,false);
+  }
+  select('Öğrenme sırasına göre zaman seç',tenseIds.map(id => [id,lessons.find(l => l[1]===id)[2]]),controls,show);
+  show(tenseIds[0]);
+}
+function renderPath() {
+  const panel = $('path');
+  const controls = element('div',null,panel);
+  controls.className = 'study-controls';
+  const topics = element('div',null,controls);
+  const out = element('div',null,panel);
+  function showLevel(level) {
+    const list = lessons.filter(l => l[0]===level);
+    topics.replaceChildren();
+    function show(id) { out.replaceChildren(); lessonCard(list.find(l => l[1]===id),out,true); }
+    select('Konu',list.map(([,id,name],i) => [id,(i+1)+'. '+name+(study.lessons[id]?' ✓':'')]),topics,show);
+    show(list[0][1]);
+  }
+  select('Seviye',[['a1','A1 — Başlangıç'],['a2','A2 — Temel']],controls,showLevel);
+  showLevel('a1');
+}
+function renderVerbs() {
+  const panel = $('verbs');
+  const controls = element('div',null,panel);
+  controls.className = 'study-controls';
+  const wrapper = element('label','İngilizce veya Türkçe ara',controls);
+  const input = element('input',null,wrapper);
+  input.type = 'search';
+  const out = element('div',null,panel);
+  const filter = select('Fiil türü',[['all','Tümü'],['regular','Düzenli'],['irregular','Düzensiz']],controls,show);
+  const match = value => value.toLocaleLowerCase('tr').normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/ı/g,'i');
+  input.oninput = show;
+  function show() {
+    out.replaceChildren();
+    const list = verbs.filter(({row,regular}) => (filter.value==='all' || regular===(filter.value==='regular')) && match(row.join(' ')).includes(match(input.value.trim())));
+    element('p',list.length+' fiil · V1 yalın hâl, V2 geçmiş, V3 üçüncü hâl',out);
+    for (const {row:[base,past,part,meaning],regular} of list) {
+      const card = element('article',null,out);
+      card.className = 'card';
+      element('h2',base+' · '+meaning,card);
+      element('div',regular?'Düzenli':'Düzensiz',card).className='muted';
+      [base,past,part].forEach((form,i) => heard('V'+(i+1)+' · '+form,card,'🔊 Dinle',base==='read' ? ['I read every day.','I read yesterday.','I have read it.'][i] : form.replace('/',' or ')));
+      const learned = button(study.learned['verb:'+base]?'✓ Öğrenildi':'⭐ Öğrendim',card,() => {
+        study.learned['verb:'+base]=true;
+        saveStudy();
+        learned.textContent='✓ Öğrenildi';
+      });
+    }
+  }
+  show();
+}
+const subjects = [
+  ['I','Ben','am','do','have'],
+  ['She','O (kadın)','is','does','has'],
+  ['We','Biz','are','do','have']
+];
+const actions = [
+  ['work','works','working','worked','worked','çalışmak',
+    ['çalışırım','çalışmam','çalışır mıyım','çalışıyor','çalışmıyor','çalışt','çalışmad','çalışacağ','çalışmayacağ','çalışm','çalışmam']],
+  ['cook','cooks','cooking','cooked','cooked','yemek yapmak',
+    ['yemek yaparım','yemek yapmam','yemek yapar mıyım','yemek yapıyor','yemek yapmıyor','yemek yapt','yemek yapmad','yemek yapacağ','yemek yapmayacağ','yemek yapm','yemek yapmam']],
+  ['go home','goes home','going home','went home','gone home','eve gitmek',
+    ['eve giderim','eve gitmem','eve gider miyim','eve gidiyor','eve gitmiyor','eve gitt','eve gitmed','eve gideceğ','eve gitmeyeceğ','eve gitm','eve gitmem']]
+];
+function buildStudy(tense, subjectIndex, actionIndex, form) {
+  const [person,trSubject,be,doVerb,have] = subjects[subjectIndex];
+  const [base,third,ing,past,part,meaning,t] = actions[actionIndex];
+  let en;
+  let tr;
+  const [pos,neg,question,ongoing,notOngoing,pastStem,notPast,future,notFuture,] = t;
+  const personal = ['um','','uz'][subjectIndex];
+  const futureVowel = future.endsWith('eğ') ? 'i' : 'ı';
+  const pastEnd = stem => (stem.endsWith('ed') || stem.endsWith('tt') ? ['im','i','ik'] : ['ım','ı','ık'])[subjectIndex];
+  const pastPhrase = stem => stem + pastEnd(stem);
+  const mi = word => /[ei][^aeıioöuü]*$/.test(word) ? 'mi' : 'mı';
+  const tFuture = (stem, ending=subjectIndex) =>
+    ending===1 ? stem.slice(0,-1)+'k' : stem+futureVowel+(ending===0?'m':'z');
+  switch (tense) {
+    case 'present': {
+      en = [person+' '+(subjectIndex===1?third:base), person+' '+doVerb+' not '+base, doVerb+' '+person.toLowerCase()+' '+base];
+      const bare = pos.slice(0,-2);
+      const negative = neg.slice(0,-1);
+      const vowel = bare.endsWith('er') ? 'i' : 'ı';
+      tr = [[pos,bare,bare+vowel+'z'][subjectIndex],
+        [neg,negative+'z',negative+'y'+(negative.endsWith('e')?'i':'ı')+'z'][subjectIndex],
+        [question, bare+' '+mi(bare), bare+' '+mi(bare)+'y'+vowel+'z'][subjectIndex]];
+      break;
+    }
+    case 'continuous':
+      en = [person+' '+be+' '+ing,person+' '+be+' not '+ing,be+' '+person.toLowerCase()+' '+ing];
+      tr = [ongoing+personal,notOngoing+personal,ongoing+' '+['muyum','mu','muyuz'][subjectIndex]];
+      break;
+    case 'past':
+      en = [person+' '+past,person+' did not '+base,'Did '+person.toLowerCase()+' '+base];
+      tr = [pastPhrase(pastStem),pastPhrase(notPast),pastPhrase(pastStem)+' '+mi(pastPhrase(pastStem))];
+      break;
+    case 'going':
+      en = [person+' '+be+' going to '+base,person+' '+be+' not going to '+base,be+' '+person.toLowerCase()+' going to '+base];
+      tr = [meaning+' için plan yapt'+['ım','ı','ık'][subjectIndex],
+        meaning+' için plan yapmad'+['ım','ı','ık'][subjectIndex],
+        meaning+' için plan yapt'+['ım','ı','ık'][subjectIndex]+' mı'];
+      break;
+    case 'will':
+      en = [person+' will '+base,person+' will not '+base,'Will '+person.toLowerCase()+' '+base];
+      tr = [tFuture(future),tFuture(notFuture),tFuture(future,1)+' '+(futureVowel==='i'?['miyim','mi','miyiz']:['mıyım','mı','mıyız'])[subjectIndex]];
+      break;
+    case 'perfect': {
+      en = [person+' '+have+' '+part,person+' '+have+' not '+part,have+' '+person.toLowerCase()+' '+part];
+      tr = [pastPhrase(pastStem),pastPhrase(notPast),pastPhrase(pastStem)+' '+mi(pastPhrase(pastStem))];
+      break;
+    }
+  }
+  const sentence = en[form].replace(/\bi\b/g,'I');
+  return [sentence.charAt(0).toUpperCase()+sentence.slice(1)+(form===2?'?':'.'),trSubject+' '+tr[form]+(form===2?'?':'.')];
+}
+function renderBuilder() {
+  const card = element('article',null,$('build'));
+  card.className = 'card';
+  element('h2','Zamanla cümle kur',card);
+  element('p','Zamanı ve cümle türünü seç. Ardından kutulardaki kişi ve eylemi değiştir.',card);
+  const controls = element('div',null,card);
+  controls.className = 'study-controls';
+  const tense = select('Zaman',tenseIds.map(id => [id,lessons.find(l=>l[1]===id)[2]]),controls,show);
+  const type = select('Cümle türü',[['0','Olumlu'],['1','Olumsuz'],['2','Soru']],controls,show);
+  const choice = {person:0,action:0};
+  const groups = [];
+  function chips(label, key, rows) {
+    element('p',label,card).className='label';
+    const group = element('div',null,card);
+    group.className='row';
+    const buttons = rows.map((label,i) => {
+      const item = button(label,group,() => { choice[key]=i;show(); });
+      item.className='chip';
+      return item;
+    });
+    groups.push([key,buttons]);
+  }
+  chips('KİŞİ','person',subjects.map(row=>row[0]));
+  chips('EYLEM','action',actions.map(row=>row[0]));
+  const out = element('div',null,card);
+  out.setAttribute('aria-live','polite');
+  function show() {
+    for (const [key,buttons] of groups) buttons.forEach((item,i) => {
+      item.classList.toggle('selected',choice[key]===i);
+      item.setAttribute('aria-pressed',String(choice[key]===i));
+    });
+    out.replaceChildren();
+    const [en,tr] = buildStudy(tense.value,choice.person,choice.action,Number(type.value));
+    const line = heard(en,out);
+    element('div',tr,line);
+    const id = 'built:'+tense.value+':'+choice.person+':'+choice.action+':'+type.value;
+    button(study.learned[id]?'✓ Öğrenildi':'⭐ Öğrendim',out,event => {
+      study.learned[id]=true;
+      saveStudy();
+      event.currentTarget.textContent='✓ Öğrenildi';
+    });
+  }
+  show();
+}
+for(const id of tenseIds) {
+  const level = lessons.find(l=>l[1]===id)[0];
+  subjects.forEach((_,s) => actions.forEach((_,a) => [0,1,2].forEach(form => {
+    const [en,tr] = buildStudy(id,s,a,form);
+    const name = lessons.find(l=>l[1]===id)[2];
+    allQuestions.push(makeQuestion('built:'+id+':'+s+':'+a+':'+form,level,name+' ile İngilizce yaz: '+tr,[en]));
+  })));
+}
+function renderReview() {
+  const panel = $('review');
+  const controls = element('div',null,panel);
+  controls.className = 'study-controls';
+  const out = element('article',null,panel);
+  out.className='card';
+  let previous;
+  const levels = select('Seviye',[['all','Karışık'],['a1','A1'],['a2','A2']],controls,next);
+  const types = select('Çalışma türü',[['all','Karışık'],['word','Kelimeler'],['verb','Fiiller'],['sentence','Cümleler'],['miss','Yanlışlarım']],controls,next);
+  button('Sonraki soru →',controls,next);
+  function next() {
+    out.replaceChildren();
+    const legacy = [...new Map(pool().map(([en,tr]) => [en,makeQuestion('legacy:'+en,'a1','İngilizce yaz: '+tr,[en])])).values()];
+    const candidates = [...allQuestions,...legacy].filter(q => levels.value==='all'||q.level===levels.value);
+    const misses = q => study.items[q.id]?.miss || (q.id.startsWith('legacy:')&&progress.mistakes[q.answers[0]]?1:0);
+    const matching = candidates.filter(q => {
+      if (types.value==='miss') return misses(q)>0;
+      if (types.value==='verb') return q.id.startsWith('verb:');
+      if (types.value==='word') return q.id.endsWith(':word');
+      if (types.value==='sentence') return q.id.startsWith('legacy:') || q.id.startsWith('built:') || q.id.endsWith(':sentence');
+      return true;
+    });
+    let list = matching.length>1 ? matching.filter(q=>q.id!==previous) : matching;
+    if (!list.length) { element('p','Bu seçimde tekrar edilecek soru yok.',out); return; }
+    const difficulty = list.filter(q=>misses(q)>0);
+    if (difficulty.length && Math.random()<0.65) list=difficulty;
+    const q = list[Math.floor(Math.random()*list.length)];
+    previous = q.id;
+    practice(out,q,correct=>{
+      if (correct && q.id.startsWith('legacy:')) {
+        delete progress.mistakes[q.answers[0]];
+        store();
+      }
+    });
+  }
+  next();
+}
+function studyStats() {
+  const panel = $('studyStats');
+  panel.replaceChildren();
+  const card = element('article',null,panel);
+  card.className='card';
+  element('h2','A1 ve A2 ilerlemem',card);
+  for (const level of ['a1','a2']) {
+    const list = lessons.filter(l => l[0]===level);
+    const completed = list.filter(l=>study.lessons[l[1]]).length;
+    const questions = allQuestions.filter(q=>q.level===level).map(q=>study.items[q.id]).filter(Boolean);
+    const totals = questions.reduce((sum,q)=>[sum[0]+q.right,sum[1]+q.wrong],[0,0]);
+    if (level==='a1') for (const [id,item] of Object.entries(study.items)) {
+      if(id.startsWith('legacy:')) { totals[0]+=item.right; totals[1]+=item.wrong; }
+    }
+    const learned = Object.keys(study.learned).filter(id=>level==='a1' ? id.startsWith('verb:')||allQuestions.some(q=>q.id===id&&q.level===level) : allQuestions.some(q=>q.id===id&&q.level===level)).length;
+    element('h3',level.toUpperCase(),card);
+    element('p',completed+' / '+list.length+' konu tamamlandı · '+learned+' öğrenilen · '+totals[0]+' doğru · '+totals[1]+' yanlış',card);
+  }
+}
+const studyPanels = {tenses:renderTenses, path:renderPath, verbs:renderVerbs, review:renderReview};
+document.querySelectorAll('[data-tab]').forEach(tab => {
+  const oldClick = tab.onclick;
+  tab.onclick = () => {
+    oldClick();
+    for (const id of Object.keys(studyPanels)) $(id).classList.toggle('hidden',id!==tab.dataset.tab);
+    const id = tab.dataset.tab;
+    if (studyPanels[id] && !$(id).childElementCount) studyPanels[id]();
+    if (id==='stats') studyStats();
+  };
+});
+renderBuilder();
 </script></body></html>
